@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Time tracking dashboard</title>
+  
+</head>
+
+<body>
+  <main class="container">
+    <div class="c-profile">
+      <div class="c-profile--upper">
+        <img src="./images/image-jeremy.png" alt="profile-image">
+        <div>
+          <p>Report for</p>
+          <h1>Jeremy Robson</h1>
+        </div>
+      </div>
+      
+      <div class="c-profile--down">
+        <a class="time-btn">Daily</a>
+        <a class="time-btn">Weekly</a>
+        <a class="time-btn">Monthly</a>
+      </div>
+    </div>
+    
+    <div class="c-work c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Work</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="work-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="work-previous"></a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-play c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Play</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="play-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="play-previous"></a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="c-study c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Study</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="study-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="study-previous"></a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="c-exercise c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Exercise</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="exercise-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="exercise-previous"></a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="c-social c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Social</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="social-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="social-previous"></a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="c-self-care c-card">
+      <div class="c-card-content">
+        <div class="c-card-content__header">
+          <h2>Self Care</h2>
+          <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+        </div>
+        
+        <div class="c-card-content__data">
+          <p id="self-care-current" class="c-card-content__hours"></p>
+          <p class="c-card-content__past">Last Week - <a id="self-care-previous"></a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script src="script.js"></script>
+</body>
+
+</html>

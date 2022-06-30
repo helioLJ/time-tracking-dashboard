@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+:root {
+    --Blue: hsl(246, 80%, 60%);
+    --Light-red-work: hsl(15, 100%, 70%);
+    --Soft-blue-play: hsl(195, 74%, 62%);
+    --Light-red-study: hsl(348, 100%, 68%);
+    --Lime-green-exercise: hsl(145, 58%, 55%);
+    --Violet-social: hsl(264, 64%, 52%);
+    --Soft-orange-self-care: hsl(43, 84%, 65%);
+    --Very-dark-blue: hsl(226, 43%, 10%);
+    --Dark-blue: hsl(235, 46%, 20%);
+    --Desaturated-blue: hsl(235, 45%, 61%);
+    --Pale-Blue: hsl(236, 100%, 87%);
+}
+
+body {
+    background-color: var(--Very-dark-blue);
+    display: flex;
+    color: white;
+    font-size: 18px; /* card titles e.g. Work, Play */
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 250px 250px;
+    grid-gap: 25px;
+    grid-template-areas: "profile work play study"
+                        "profile exercise social selfcare";
+    max-width: 1100px;
+    margin: auto;
+}
+
+.c-profile {
+    background-color: var(--Dark-blue);
+    grid-area: profile;
+    border-radius: 15px;
+}
+
+.c-profile--upper {
+    background-color: var(--Blue);
+    border-radius: 15px;
+    height: 65%;
+    padding: 30px;
+}
+
+.c-profile--upper img {
+    width: 80px;
+    border: 3px solid white;
+    border-radius: 100%;
+    margin-bottom: 40px;
+}
+
+.c-profile--upper p {
+    color: var(--Pale-Blue);
+    font-size: 15px;
+}
+
+.c-profile--upper h1 {
+    font-weight: 300;
+}
+
+.c-profile--down {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.c-profile--down a {
+    color: var(--Desaturated-blue);
+    cursor: pointer;
+    display: block;
+    font-weight: 300;
+    margin-bottom: 20px;
+    transition: color 0.2s ease;
+}
+
+.c-profile--down a:hover {
+    color: white;
+}
+
+.time-range-active {
+    color: white !important;
+}
+
+.c-card {
+    background-repeat: no-repeat;
+    background-position: 90% -10%;
+    border-radius: 15px 15px 20px 20px;
+    padding-top: 45px;
+}
+
+.c-card-content {
+    background-color: var(--Dark-blue);
+    cursor: pointer;
+    padding: 30px;
+    border-radius: 15px;
+    height: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.c-card-content:hover {
+    background-color: hsl(236, 42%, 33%);
+}
+
+.c-work {
+    background-color: var(--Light-red-work);
+    background-image: url(./images/icon-work.svg);
+    grid-area: work;
+}
+
+.c-play {
+    background-color: var(--Soft-blue-play);
+    background-image: url(./images/icon-play.svg);
+    grid-area: play;
+}
+
+.c-study {
+    background-color: var(--Light-red-study);
+    background-image: url(./images/icon-study.svg);
+    grid-area: study;
+}
+
+.c-exercise {
+    background-color: var(--Lime-green-exercise);
+    background-image: url(./images/icon-exercise.svg);
+    grid-area: exercise;
+}
+
+.c-social {
+    background-color: var(--Violet-social);
+    background-image: url(./images/icon-social.svg);
+    grid-area: social;
+}
+
+.c-self-care {
+    background-color: var(--Soft-orange-self-care);
+    background-image: url(./images/icon-self-care.svg);
+    grid-area: selfcare;
+}
+
+.c-card-content__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.c-card-content__header h2 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.c-card-content__header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.c-card-content__hours {
+    font-size: 55px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.c-card-content__past {
+    color: var(--Pale-Blue);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px 170px 170px 170px 170px 170px 170px ;
+        grid-template-areas: "profile"
+        "work"
+        "play"
+        "study"
+        "exercise"
+        "social"
+        "selfcare";
+    }
+
+    .c-profile--upper {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .c-profile--upper img {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .c-profile--down {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .c-profile--down a {
+        margin: 0;
+    }
+
+    .c-card-content__header {
+        margin-bottom: 10px;
+    }
+
+    .c-card-content__data {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .c-card-content__hours {
+        font-size: 40px;
+    }
+}
