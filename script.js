@@ -1,247 +1,96 @@
-const data = [
-    {
-      "title": "Work",
-      "timeframes": {
-        "daily": {
-          "current": 5,
-          "previous": 7
-        },
-        "weekly": {
-          "current": 32,
-          "previous": 36
-        },
-        "monthly": {
-          "current": 103,
-          "previous": 128
-        }
-      }
-    },
-    {
-      "title": "Play",
-      "timeframes": {
-        "daily": {
-          "current": 1,
-          "previous": 2
-        },
-        "weekly": {
-          "current": 10,
-          "previous": 8
-        },
-        "monthly": {
-          "current": 23,
-          "previous": 29
-        }
-      }
-    },
-    {
-      "title": "Study",
-      "timeframes": {
-        "daily": {
-          "current": 0,
-          "previous": 1
-        },
-        "weekly": {
-          "current": 4,
-          "previous": 7
-        },
-        "monthly": {
-          "current": 13,
-          "previous": 19
-        }
-      }
-    },
-    {
-      "title": "Exercise",
-      "timeframes": {
-        "daily": {
-          "current": 1,
-          "previous": 1
-        },
-        "weekly": {
-          "current": 4,
-          "previous": 5
-        },
-        "monthly": {
-          "current": 11,
-          "previous": 18
-        }
-      }
-    },
-    {
-      "title": "Social",
-      "timeframes": {
-        "daily": {
-          "current": 1,
-          "previous": 3
-        },
-        "weekly": {
-          "current": 5,
-          "previous": 10
-        },
-        "monthly": {
-          "current": 21,
-          "previous": 23
-        }
-      }
-    },
-    {
-      "title": "Self Care",
-      "timeframes": {
-        "daily": {
-          "current": 0,
-          "previous": 1
-        },
-        "weekly": {
-          "current": 2,
-          "previous": 2
-        },
-        "monthly": {
-          "current": 7,
-          "previous": 11
-        }
-      }
-    }
-  ]
+let timeframe = 'weekly'; // default value
+const container = document.querySelector('.container');
+let regularCards; // placeholder for all cards 
 
-const timeBtns = document.querySelectorAll('.time-btn');
+// 1. Initializate Menu
+const menu = document.querySelectorAll('.time-btn')
 
-const workCurrent = document.querySelector('#work-current');
-const workPrevious = document.querySelector('#work-previous');
+menu.forEach(element => {
+  element.addEventListener('click', menuOnClick)
+})
 
-const playCurrent = document.querySelector('#play-current');
-const playPrevious = document.querySelector('#play-previous');
+// 2. Get JSON Data And Create Cards
 
-const studyCurrent = document.querySelector('#study-current');
-const studyPrevious = document.querySelector('#study-previous');
+let data = {}
 
-const exerciseCurrent = document.querySelector('#exercise-current');
-const exercisePrevious = document.querySelector('#exercise-previous');
-
-const socialCurrent = document.querySelector('#social-current');
-const socialPrevious = document.querySelector('#social-previous');
-
-const selfCareCurrent = document.querySelector('#self-care-current');
-const selfCarePrevious = document.querySelector('#self-care-previous');
-
-setDataDaily();
-
-timeBtns.forEach(btn => {
-    btn.addEventListener('click', e => {
-        const textBtn = e.currentTarget.textContent;
-        const currentBtn = e.currentTarget;
-        
-        if(textBtn == 'Daily') {
-            setDataDaily();
-            styleButton(currentBtn);
-        } else if (textBtn == 'Weekly') {
-            setDataWeekly()/
-            styleButton(currentBtn);
-        } else if (textBtn == 'Monthly') {
-            setDataMonthly()/
-            styleButton(currentBtn);
-        }
-    });
-});
-
-function styleButton(currentBtn) {
-    timeBtns.forEach(btn => {
-        btn.classList.remove('time-range-active')
+fetch('data.json')
+  .then(resp => resp.json())
+  .then(jsonData => {
+    // Create Cards
+    jsonData.forEach(element => {
+      container.insertAdjacentHTML('beforeend',
+        createRegularCard(element, timeframe));
     })
-    currentBtn.classList.add('time-range-active')
+
+    // convert array to dict
+    jsonData.forEach(element => {
+      data[element.title] = element.timeframes
+    })
+
+    //
+    regularCards = document.querySelectorAll('.c-card')
+    console.log(regularCards);
+  })
+
+// Functions
+
+function menuOnClick(event) {
+  menu.forEach(element => {
+    element.classList.remove('time-range-active')
+  })
+  event.target.classList.add('time-range-active')
+  timeframe = event.target.innerText.toLowerCase()
+
+  updateCards(timeframe)
 }
 
-function setDataDaily() {
-    workCurrent.textContent = data[0].timeframes.daily.current + 
-                            (data[0].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    workPrevious.textContent = data[0].timeframes.daily.previous + 
-                            (data[0].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
-
-    playCurrent.textContent = data[1].timeframes.daily.current +
-                            (data[1].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    playPrevious.textContent = data[1].timeframes.daily.previous +
-                            (data[1].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
-
-    studyCurrent.textContent = data[2].timeframes.daily.current +
-                            (data[2].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    studyPrevious.textContent = data[2].timeframes.daily.previous +
-                            (data[2].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
-
-    exerciseCurrent.textContent = data[3].timeframes.daily.current +
-                            (data[3].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    exercisePrevious.textContent = data[3].timeframes.daily.previous +
-                            (data[3].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
-
-    socialCurrent.textContent = data[4].timeframes.daily.current +
-                            (data[4].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    socialPrevious.textContent = data[4].timeframes.daily.previous +
-                            (data[4].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
-
-    selfCareCurrent.textContent = data[5].timeframes.daily.current +
-                            (data[5].timeframes.daily.current > 1 ? 'hrs' : 'hr')
-    selfCarePrevious.textContent = data[5].timeframes.daily.previous +
-                            (data[5].timeframes.daily.previous > 1 ? 'hrs' : 'hr')
+function updateCards(timeframe) {
+  regularCards.forEach(card => {
+    updateCard(card, timeframe)
+  })
 }
 
-function setDataWeekly() {
-    workCurrent.textContent = data[0].timeframes.weekly.current + 
-                            (data[0].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    workPrevious.textContent = data[0].timeframes.weekly.previous + 
-                            (data[0].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
+function updateCard(card, timeframe) {
+  const title = card.querySelector('h2').innerText
+  const current = data[title][timeframe]['current']
+  const previous = data[title][timeframe]['previous']
 
-    playCurrent.textContent = data[1].timeframes.weekly.current +
-                            (data[1].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    playPrevious.textContent = data[1].timeframes.weekly.previous +
-                            (data[1].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
+  const timeFrameMsg = {
+    'daily': 'Yesterday',
+    'weekly': 'Last Week',
+    'monthly': 'Last Month'
+  }
 
-    studyCurrent.textContent = data[2].timeframes.weekly.current +
-                            (data[2].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    studyPrevious.textContent = data[2].timeframes.weekly.previous +
-                            (data[2].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
-
-    exerciseCurrent.textContent = data[3].timeframes.weekly.current +
-                            (data[3].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    exercisePrevious.textContent = data[3].timeframes.weekly.previous +
-                            (data[3].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
-
-    socialCurrent.textContent = data[4].timeframes.weekly.current +
-                            (data[4].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    socialPrevious.textContent = data[4].timeframes.weekly.previous +
-                            (data[4].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
-
-    selfCareCurrent.textContent = data[5].timeframes.weekly.current +
-                            (data[5].timeframes.weekly.current > 1 ? 'hrs' : 'hr')
-    selfCarePrevious.textContent = data[5].timeframes.weekly.previous +
-                            (data[5].timeframes.weekly.previous > 1 ? 'hrs' : 'hr')
+  const hoursElement = card.querySelector('.c-card-content__hours')
+  hoursElement.innerText = `${current}hrs`
+  const msgElement = card.querySelector('.c-card-content__past')
+  msgElement.innerText = `${timeFrameMsg[timeframe]} - ${previous}hrs`
 }
 
-function setDataMonthly() {
-    workCurrent.textContent = data[0].timeframes.monthly.current + 
-                            (data[0].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    workPrevious.textContent = data[0].timeframes.monthly.previous + 
-                            (data[0].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
+function createRegularCard(element, timeframe) {
+  let title = element['title']
+  let current = element['timeframes'][timeframe]['current']
+  let previous = element['timeframes'][timeframe]['previous']
 
-    playCurrent.textContent = data[1].timeframes.monthly.current +
-                            (data[1].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    playPrevious.textContent = data[1].timeframes.monthly.previous +
-                            (data[1].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
+  const timeFrameMsg = {
+    'daily': 'Yesterday',
+    'weekly': 'Last Week',
+    'monthly': 'Last Month'
+  }
 
-    studyCurrent.textContent = data[2].timeframes.monthly.current +
-                            (data[2].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    studyPrevious.textContent = data[2].timeframes.monthly.previous +
-                            (data[2].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
-
-    exerciseCurrent.textContent = data[3].timeframes.monthly.current +
-                            (data[3].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    exercisePrevious.textContent = data[3].timeframes.monthly.previous +
-                            (data[3].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
-
-    socialCurrent.textContent = data[4].timeframes.monthly.current +
-                            (data[4].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    socialPrevious.textContent = data[4].timeframes.monthly.previous +
-                            (data[4].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
-
-    selfCareCurrent.textContent = data[5].timeframes.monthly.current +
-                            (data[5].timeframes.monthly.current > 1 ? 'hrs' : 'hr')
-    selfCarePrevious.textContent = data[5].timeframes.monthly.previous +
-                            (data[5].timeframes.monthly.previous > 1 ? 'hrs' : 'hr')
+  console.log(title, current, previous);
+  return `
+<div class="${'c-'+title.toLowerCase().replace(/\s/g, '')} c-card">
+  <div class="c-card-content">
+    <div class="c-card-content__header">
+      <h2>${title}</h2>
+      <button><img src="./images/icon-ellipsis.svg" alt="icon-ellipsis"></button>
+    </div>
+    
+    <div class="c-card-content__data">
+      <p id="work-current" class="c-card-content__hours">${current}</p>
+      <p class="c-card-content__past" id="work-previous">${timeFrameMsg[timeframe]} - ${previous} hrs</p>
+    </div>
+  </div>
+</div>`
 }

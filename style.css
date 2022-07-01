@@ -142,7 +142,7 @@ main {
     grid-area: social;
 }
 
-.c-self-care {
+.c-selfcare {
     background-color: var(--Soft-orange-self-care);
     background-image: url(./images/icon-self-care.svg);
     grid-area: selfcare;
